@@ -1,10 +1,6 @@
-import {
-  basename,
-  dirname,
-  resolve,
-} from "std/path/mod.ts";
+import { basename, dirname, resolve } from "std/path/mod.ts";
 
-import { } from "std/fs/mod.ts";
+import {} from "std/fs/mod.ts";
 
 interface NodeBase {
   /**
