@@ -1,16 +1,20 @@
 import { join } from "std/path/mod.ts";
 import { assert, assertFalse } from "std/testing/asserts.ts";
+import { afterEach, beforeEach, describe, it } from "std/testing/bdd.ts";
 
-const { test } = Deno;
-
-test("Deno.remove", {
+describe("Deno.remove", {
   permissions: { read: true, write: true },
-}, async ({ step }) => {
+}, () => {
   let temp: string;
 
-  await step("do not follow symbol link for recursive delete", async () => {
-    // arrange
+  beforeEach(async () => {
     temp = await Deno.makeTempDir({ prefix: "confirm-rm-test_" });
+  });
+
+  afterEach(() => Deno.remove(temp, { recursive: true }));
+
+  it("do not follow symbol link for recursive delete", async () => {
+    // arrange
     const referred = join(temp, "referred");
     const test = join(temp, "test");
 
@@ -33,8 +37,6 @@ test("Deno.remove", {
     assert(await exists(referred));
     assert(await exists(join(referred, "r1")));
   });
-
-  await step("cleanup", () => Deno.remove(temp, { recursive: true }));
 });
 
 async function exists(path: string) {
