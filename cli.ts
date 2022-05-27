@@ -1,7 +1,7 @@
 import { join } from "std/path/mod.ts";
 
 import { generateTree } from "./mod.ts";
-import { debugAssert } from "./utils.ts";
+import { debugAssert } from "./test_utils.ts";
 
 const tree = await generateTree(Deno.cwd(), Deno.args);
 

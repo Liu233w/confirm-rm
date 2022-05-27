@@ -1,3 +1,8 @@
+cache:
+	deno cache \
+	--import-map import_map.json \
+	mod.ts cli.ts
+
 test:
 	deno test \
 	--allow-read --allow-write \
