@@ -3,4 +3,6 @@
 A safer rm with confirmation!
 
 ## install
-> deno install --import-map https://cdn.jsdelivr.net/gh/Liu233w/confirm-rm/import-map.json --allow-read --allow-write https://cdn.jsdelivr.net/gh/Liu233w/confirm-rm/cli.ts
+```shell
+deno install --import-map https://deno.land/x/confirm_rm@v0.0.1/import_map.json --allow-read --allow-write https://deno.land/x/confirm_rm@v0.0.1/cli.ts
+```
