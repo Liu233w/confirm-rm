@@ -116,7 +116,7 @@ export class ConfirmRmCore {
     return {
       type: "folder",
       path,
-      children: [],
+      children,
       childrenCount: await this.countChildren(path),
     };
   }
