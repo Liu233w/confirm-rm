@@ -13,10 +13,11 @@ export class NodeFormatter {
   private lineFeed = "\n";
 
   public nodeToCliString(roots: Roots): string {
-    return [
-      ...roots.roots.map((root) => this.formatNode(0, root)).flat(),
-      `... (${roots.count} entries in total)`,
-    ].join(this.lineFeed);
+    const lines = roots.roots.map((root) => this.formatNode(0, root)).flat();
+    if (roots.roots.length < roots.count) {
+      lines.push(`... (${roots.count} entries in total)`);
+    }
+    return lines.join(this.lineFeed);
   }
 
   private formatNode(level: number, node: Node): string[] {
@@ -45,12 +46,18 @@ export class NodeFormatter {
   }
 
   private formatFolder(level: number, node: FolderNode): string[] {
-    return [
-      this.spaces(level) +
-      rgb24(node.path, this.folderNodeColor) +
-      ` (${node.childrenCount} in total)`,
+    const lines = [
+      this.spaces(level) + rgb24(node.path, this.folderNodeColor),
       ...node.children.map((n) => this.formatNode(level + 1, n)).flat(),
     ];
+
+    if (node.children.length < node.childrenCount) {
+      lines.push(
+        `${this.spaces(level + 1)}... (${node.childrenCount} in total)`,
+      );
+    }
+
+    return lines;
   }
 
   private spaces(level: number): string {
