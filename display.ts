@@ -17,7 +17,7 @@ export class NodeFormatter {
       .map((root) => this.formatNode(0, root))
       .reduce((a, b) => a + b, "");
     if (roots.roots.length < roots.count) {
-      res += "..." + this.lineFeed;
+      res += `... (${roots.count} entries in total)` + this.lineFeed;
     }
     return res;
   }
@@ -46,10 +46,8 @@ export class NodeFormatter {
 
   private formatFolder(level: number, node: FolderNode): string {
     return this.spaces(level) +
-      rgb24(
-        node.path + ` (${node.childrenCount} in total)`,
-        this.folderNodeColor,
-      ) + this.lineFeed +
+      rgb24(node.path, this.folderNodeColor) +
+      ` (${node.childrenCount} in total)` + this.lineFeed +
       node.children.map((n) => this.formatNode(level + 1, n));
   }
 
