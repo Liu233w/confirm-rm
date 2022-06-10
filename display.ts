@@ -8,14 +8,14 @@ export class NodeFormatter {
 
   public notExistNodeColor = 0xCCFFFF;
 
-  public levelSpaces: number = 2;
+  public levelSpaces: number = 4;
 
   private lineFeed = "\n";
 
   public nodeToCliString(roots: Roots): string {
     const lines = roots.roots.map((root) => this.formatNode(0, root)).flat();
     if (roots.roots.length < roots.count) {
-      lines.push(`... (${roots.count} entries in total)`);
+      lines.push(`... and ${roots.count - roots.roots.length} more entry(s)`);
     }
     return lines.join(this.lineFeed);
   }
@@ -51,9 +51,13 @@ export class NodeFormatter {
       ...node.children.map((n) => this.formatNode(level + 1, n)).flat(),
     ];
 
-    if (node.children.length < node.childrenCount) {
+    const realChildrenNum = node.childrenCount;
+    const displayedChildrenNum = node.children.length;
+    if (displayedChildrenNum < realChildrenNum) {
       lines.push(
-        `${this.spaces(level + 1)}... (${node.childrenCount} in total)`,
+        `${this.spaces(level + 1)}... and ${
+          realChildrenNum - displayedChildrenNum
+        } more file(s)`,
       );
     }
 
