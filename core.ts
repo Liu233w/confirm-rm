@@ -1,4 +1,4 @@
-import { FolderNode, Node } from "./types.ts";
+import { FolderNode, Node, Roots } from "./types.ts";
 
 import { join, resolve } from "std/path/mod.ts";
 
@@ -9,7 +9,14 @@ export class ConfirmRmCore {
   public constructor(private paths: string[]) {
   }
 
-  public async generateTree(): Promise<Node[]> {
+  public async generateTree(): Promise<Roots> {
+    return {
+      roots: await this.getTrees(),
+      count: this.paths.length,
+    };
+  }
+
+  private getTrees() {
     if (this.paths.length >= this.maxRootNumber) {
       return this.getApproximateTrees();
     }

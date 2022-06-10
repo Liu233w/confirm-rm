@@ -30,3 +30,8 @@ export interface FolderNode extends NodeBase {
 }
 
 export type Node = FileNode | FolderNode | NotExistNode;
+
+export interface Roots {
+  roots: Node[];
+  count: number;
+}

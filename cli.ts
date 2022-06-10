@@ -1,16 +1,16 @@
 import { join } from "std/path/mod.ts";
 
-import { generateTree } from "./mod.ts";
+import { ConfirmRmCore } from "./mod.ts";
 import { debugAssert } from "./test_utils.ts";
+import { NodeFormatter } from "./display.ts";
 
-const tree = await generateTree(Deno.cwd(), Deno.args);
+const core = new ConfirmRmCore(Deno.args);
+const tree = await core.generateTree();
 
 console.log("Will delete files and folders:");
 
-for (const file of tree) {
-  debugAssert(file.root.type === "file");
-  console.log(join(file.basePath, file.root.name));
-}
+const formatter = new NodeFormatter();
+console.log(formatter.nodeToCliString(tree));
 
 const input = prompt("Proceed? [Y/n]: ", "");
 const confirm = ["y", "Y", "yes", "Yes", "", null].includes(input);
