@@ -7,8 +7,8 @@ test:
 	--allow-read --allow-write \
 	./
 
-compile:
-	deno compile \
-	--allow-read --allow-write \
-	--output build/confirm-rm \
-	cli.ts
+build-all:
+	deno run --allow-run ./build.ts ${VERSION}
+
+clean:
+	rm -rf ./build
