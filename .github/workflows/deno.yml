@@ -12,10 +12,7 @@ on:
   push:
   pull_request:
     branches: ["main"]
-
-permissions:
-  contents: read|write
-
+    
 jobs:
   test:
     runs-on: ubuntu-latest
