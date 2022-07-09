@@ -1,11 +1,10 @@
 import { afterEach, beforeEach, describe, it } from "std/testing/bdd.ts";
 import {
-  assert,
   assertArrayIncludes,
   assertEquals,
   assertObjectMatch,
 } from "std/testing/asserts.ts";
-import { join, resolve } from "std/path/mod.ts";
+import { join } from "std/path/mod.ts";
 import { ConfirmRmCore } from "./core.ts";
 import { FolderNode } from "./types.ts";
 

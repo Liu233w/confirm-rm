@@ -8,7 +8,7 @@ export class NodeFormatter {
 
   public notExistNodeColor = 0xCCFFFF;
 
-  public levelSpaces: number = 4;
+  public levelSpaces = 4;
 
   private lineFeed = "\n";
 
