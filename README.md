@@ -15,7 +15,7 @@ Download latest pre-build binary via
 
 ```shell
 # Change version by your need
-VERSION=v0.1.5
+VERSION=v0.2.0
 # install using Deno
 deno install --import-map "https://deno.land/x/confirm_rm@$VERSION/import_map.json" --allow-read --allow-write "https://deno.land/x/confirm_rm@$VERSION/cli.ts"
 # set alias
