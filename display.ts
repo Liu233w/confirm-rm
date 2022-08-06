@@ -1,8 +1,17 @@
-import { FileNode, FolderNode, Node, NotExistNode, Roots } from "./types.ts";
+import {
+  FileNode,
+  FolderNode,
+  Node,
+  NotExistNode,
+  Roots,
+  SymbolLinkNode,
+} from "./types.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 
 export class NodeFormatter {
   public fileNodeColor = 0x00FFFF;
+
+  public symbolLinkNodeColor = 0x00FFFF;
 
   public folderNodeColor = 0xFF00FF;
 
@@ -25,6 +34,8 @@ export class NodeFormatter {
       return this.formatFolder(level, node);
     } else if (node.type === "file") {
       return this.formatFile(level, node);
+    } else if (node.type === "symbol_link") {
+      return this.formatSymbolLink(level, node);
     } else if (node.type === "not_exist") {
       return this.formatNotExistNode(level, node);
     } else {
@@ -35,6 +46,11 @@ export class NodeFormatter {
   private formatFile(level: number, node: FileNode): string[] {
     return [
       this.spaces(level) + rgb24(node.path, this.fileNodeColor),
+    ];
+  }
+  private formatSymbolLink(level: number, node: SymbolLinkNode): string[] {
+    return [
+      this.spaces(level) + rgb24(node.path, this.symbolLinkNodeColor),
     ];
   }
 

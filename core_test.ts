@@ -110,6 +110,34 @@ describe("core function", { permissions: { read: true, write: true } }, () => {
         assertArrayIncludes(names, [root.path]);
       }
     });
+
+    it("shows soft link correctly", async () => {
+      // arrange
+      const realPath = join(TEST_DIR, "real");
+      await Deno.mkdir(realPath);
+
+      for (const file of ["1.txt", "2.txt"]) {
+        const f = await Deno.create(join(realPath, file));
+        f.close();
+      }
+
+      const symbolPath = join(TEST_DIR, "symbol");
+      await Deno.symlink(realPath, symbolPath);
+
+      // act
+      const core = new ConfirmRmCore([
+        symbolPath,
+      ]);
+      const roots = await core.generateTree();
+
+      // assert
+      assertEquals(roots.count, 1);
+      assertEquals(roots.roots.length, 1);
+      assertObjectMatch(roots.roots[0], {
+        type: "symbol_link",
+        path: symbolPath,
+      });
+    });
   });
 
   async function createFiles(files: string[]) {

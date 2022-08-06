@@ -13,6 +13,10 @@ export interface FileNode extends NodeBase {
   type: "file";
 }
 
+export interface SymbolLinkNode extends NodeBase {
+  type: "symbol_link";
+}
+
 export interface FolderNode extends NodeBase {
   type: "folder";
 
@@ -29,7 +33,7 @@ export interface FolderNode extends NodeBase {
   childrenCount: number;
 }
 
-export type Node = FileNode | FolderNode | NotExistNode;
+export type Node = FileNode | FolderNode | NotExistNode | SymbolLinkNode;
 
 export interface Roots {
   roots: Node[];

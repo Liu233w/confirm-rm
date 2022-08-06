@@ -54,9 +54,14 @@ export class ConfirmRmCore {
     const fullPath = parent ? resolve(parent, path) : path;
 
     try {
-      const stat = await Deno.stat(fullPath);
+      const stat = await Deno.lstat(fullPath);
       if (stat.isDirectory) {
         return folderHandler(path, parent);
+      } else if (stat.isSymlink) {
+        return {
+          type: "symbol_link",
+          path,
+        };
       } else {
         return {
           type: "file",
