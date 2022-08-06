@@ -7,9 +7,12 @@ A safer rm with confirmation!
 ## install
 
 ### Pre-build binary
-Download latest pre-build binary via [release](https://github.com/Liu233w/confirm-rm/releases)
+
+Download latest pre-build binary via
+[release](https://github.com/Liu233w/confirm-rm/releases)
 
 ### Install via Deno
+
 ```shell
 # Change version by your need
 VERSION=v0.1.5
